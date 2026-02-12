@@ -2,6 +2,10 @@
 
 A complete Node.js and Express.js backend API for ShoppyGlobe e-commerce platform with MongoDB integration and JWT authentication.
 
+## 👨‍💻 Author
+**Name**: Ankit 
+**Email**: ankitattri018@gmail.com 
+
 ## 🚀 Features
 
 - **User Authentication** - JWT-based registration and login

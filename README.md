@@ -36,7 +36,7 @@ A professional React-based online library management system built with Vite, fea
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone 
    cd "React Project -2"
    ```
 

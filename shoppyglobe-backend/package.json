@@ -9,7 +9,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": ["ecommerce", "api", "nodejs", "express", "mongodb"],
-  "author": "",
+  "author": "ankit",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
