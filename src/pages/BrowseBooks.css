@@ -1,0 +1,88 @@
+.booksBrowsePage {
+  width: 100%;
+  padding: 2rem;
+}
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pageHeader h1 {
+  color: #000000;
+  margin-bottom: 1rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.pageHeader h1 i {
+  margin-right: 1rem;
+}
+
+.bookSearchArea {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666666;
+  z-index: 1;
+}
+
+.bookSearchArea input {
+  width: 100%;
+  padding: 0.75rem 0.75rem 0.75rem 3rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.bookSearchArea input:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.booksCollection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.noBooksMessage {
+  text-align: center;
+  color: #666666;
+  font-size: 1.2rem;
+  grid-column: 1 / -1;
+  padding: 2rem;
+}
+
+.noBooksMessage i {
+  margin-right: 0.5rem;
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .booksBrowsePage {
+    padding: 1rem;
+  }
+  
+  .bookSearchArea {
+    max-width: 100%;
+  }
+  
+  .bookSearchArea input {
+    font-size: 0.9rem;
+  }
+  
+  .booksCollection {
+    grid-template-columns: 1fr;
+  }
+}

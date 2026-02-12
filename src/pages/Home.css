@@ -1,0 +1,186 @@
+.homePage {
+  width: 100%;
+  padding: 0;
+}
+
+.welcomeBanner {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #000000;
+  color: white;
+  position: relative;
+}
+
+.bannerContent {
+  position: relative;
+  z-index: 1;
+}
+
+.welcomeBanner h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.welcomeBanner h1 i {
+  margin-right: 1rem;
+}
+
+.welcomeBanner p {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.pageSection {
+  padding: 4rem 2rem;
+}
+
+.bookCategories h2, .featuredBooks h2 {
+  color: #000000;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 700;
+  position: relative;
+}
+
+.bookCategories h2 i, .featuredBooks h2 i {
+  margin-right: 1rem;
+}
+
+.bookCategories h2::after, .featuredBooks h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: #000000;
+  border-radius: 2px;
+}
+
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.categoryTile {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.categoryTile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-color: #000000;
+}
+
+.categoryIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.categoryTile h3 {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  font-weight: 600;
+}
+
+.categoryTile p {
+  margin: 0;
+  color: #666666;
+  font-weight: 400;
+}
+
+.booksCollection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.libraryStatistics {
+  background: #f8f8f8;
+  padding: 3rem 2rem;
+  margin: 4rem 0;
+}
+
+.statisticsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.statisticCard {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.statisticIcon {
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.numberDisplay {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000000;
+  display: block;
+}
+
+.statisticLabel {
+  color: #666666;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .welcomeBanner {
+    padding: 3rem 1rem;
+  }
+  
+  .pageSection {
+    padding: 2rem 1rem;
+  }
+  
+  .categoriesGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .categoryTile {
+    padding: 2rem;
+  }
+  
+  .categoryIcon {
+    font-size: 2rem;
+  }
+  
+  .booksCollection {
+    grid-template-columns: 1fr;
+  }
+  
+  .libraryStatistics {
+    padding: 2rem 1rem;
+  }
+}

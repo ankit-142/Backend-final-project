@@ -1,0 +1,68 @@
+// Authentication routes for user registration and login
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+
+const router = express.Router();
+
+// POST /register - Register new user
+router.post('/register', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // Validate input
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // Check if user exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'User already exists' });
+    }
+
+    // Create user
+    const user = new User({ name, email, password });
+    await user.save();
+
+    // Generate JWT token
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+    res.status(201).json({ message: 'User registered successfully', token, userId: user._id });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /login - Authenticate user
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    // Find user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Verify password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+    res.json({ message: 'Login successful', token, userId: user._id });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+export default router;

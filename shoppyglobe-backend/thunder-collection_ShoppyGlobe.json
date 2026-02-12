@@ -1,0 +1,365 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "ShoppyGlobe",
+  "collectionId": "shoppyglobe-collection",
+  "dateExported": "2024-01-01T00:00:00.000Z",
+  "version": "1.2",
+  "folders": [
+    {
+      "id": "auth-folder",
+      "name": "Authentication",
+      "containerId": "",
+      "created": "2024-01-01T00:00:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "id": "products-folder",
+      "name": "Products (Public)",
+      "containerId": "",
+      "created": "2024-01-01T00:00:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "id": "cart-folder",
+      "name": "Cart (Protected)",
+      "containerId": "",
+      "created": "2024-01-01T00:00:00.000Z",
+      "sortNum": 30000
+    }
+  ],
+  "requests": [
+    {
+      "id": "register-request",
+      "name": "Register User",
+      "url": "http://localhost:5000/register",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "201"
+        },
+        {
+          "type": "json-query",
+          "value": "$.token",
+          "action": "istype",
+          "expected": "string"
+        },
+        {
+          "type": "json-query",
+          "value": "$.message",
+          "action": "equal",
+          "expected": "User registered successfully"
+        }
+      ],
+      "containerId": "auth-folder"
+    },
+    {
+      "id": "login-request",
+      "name": "Login User",
+      "url": "http://localhost:5000/login",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "value": "$.token",
+          "action": "istype",
+          "expected": "string"
+        },
+        {
+          "type": "json-query",
+          "value": "$.message",
+          "action": "equal",
+          "expected": "Login successful"
+        },
+        {
+          "type": "set-env-var",
+          "value": "$.token",
+          "action": "token"
+        }
+      ],
+      "containerId": "auth-folder"
+    },
+    {
+      "id": "get-products",
+      "name": "Get All Products",
+      "url": "http://localhost:5000/products",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "200"
+        },
+        {
+          "type": "res-body",
+          "value": "isarray"
+        },
+        {
+          "type": "json-query",
+          "value": "$[0].name",
+          "action": "istype",
+          "expected": "string"
+        },
+        {
+          "type": "json-query",
+          "value": "$[0].price",
+          "action": "istype",
+          "expected": "number"
+        },
+        {
+          "type": "json-query",
+          "value": "$.length",
+          "action": "gt",
+          "expected": "0"
+        }
+      ],
+      "containerId": "products-folder"
+    },
+    {
+      "id": "get-product-by-id",
+      "name": "Get Product by ID",
+      "url": "http://localhost:5000/products/{{productId}}",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "value": "$._id",
+          "action": "istype",
+          "expected": "string"
+        },
+        {
+          "type": "json-query",
+          "value": "$.name",
+          "action": "istype",
+          "expected": "string"
+        },
+        {
+          "type": "json-query",
+          "value": "$.stock",
+          "action": "istype",
+          "expected": "number"
+        }
+      ],
+      "containerId": "products-folder"
+    },
+    {
+      "id": "get-product-invalid",
+      "name": "Get Product - Invalid ID (404)",
+      "url": "http://localhost:5000/products/000000000000000000000000",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "404"
+        },
+        {
+          "type": "json-query",
+          "value": "$.error",
+          "action": "equal",
+          "expected": "Product not found"
+        }
+      ],
+      "containerId": "products-folder"
+    },
+    {
+      "id": "add-to-cart",
+      "name": "Add Product to Cart",
+      "url": "http://localhost:5000/cart",
+      "method": "POST",
+      "sortNum": 60000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"productId\": \"{{productId}}\",\n  \"quantity\": 2\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "201"
+        },
+        {
+          "type": "json-query",
+          "value": "$.cart.quantity",
+          "action": "equal",
+          "expected": "2"
+        },
+        {
+          "type": "json-query",
+          "value": "$.message",
+          "action": "contains",
+          "expected": "cart"
+        }
+      ],
+      "containerId": "cart-folder"
+    },
+    {
+      "id": "add-invalid-product",
+      "name": "Add Invalid Product (Validation)",
+      "url": "http://localhost:5000/cart",
+      "method": "POST",
+      "sortNum": 70000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"productId\": \"000000000000000000000000\",\n  \"quantity\": 1\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "404"
+        },
+        {
+          "type": "json-query",
+          "value": "$.error",
+          "action": "equal",
+          "expected": "Product not found"
+        }
+      ],
+      "containerId": "cart-folder"
+    },
+    {
+      "id": "update-cart",
+      "name": "Update Cart Quantity",
+      "url": "http://localhost:5000/cart/{{cartId}}",
+      "method": "PUT",
+      "sortNum": 80000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"quantity\": 5\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "value": "$.cart.quantity",
+          "action": "equal",
+          "expected": "5"
+        },
+        {
+          "type": "json-query",
+          "value": "$.message",
+          "action": "equal",
+          "expected": "Cart updated"
+        }
+      ],
+      "containerId": "cart-folder"
+    },
+    {
+      "id": "delete-cart",
+      "name": "Delete Cart Item",
+      "url": "http://localhost:5000/cart/{{cartId}}",
+      "method": "DELETE",
+      "sortNum": 90000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "value": "$.message",
+          "action": "equal",
+          "expected": "Product removed from cart"
+        }
+      ],
+      "containerId": "cart-folder"
+    },
+    {
+      "id": "cart-no-auth",
+      "name": "Cart Without Auth (401)",
+      "url": "http://localhost:5000/cart",
+      "method": "POST",
+      "sortNum": 100000,
+      "created": "2024-01-01T00:00:00.000Z",
+      "modified": "2024-01-01T00:00:00.000Z",
+      "headers": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"productId\": \"{{productId}}\",\n  \"quantity\": 1\n}",
+        "form": []
+      },
+      "tests": [
+        {
+          "type": "res-code",
+          "value": "401"
+        },
+        {
+          "type": "json-query",
+          "value": "$.error",
+          "action": "contains",
+          "expected": "token"
+        }
+      ],
+      "containerId": "cart-folder"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+.pageNotFoundScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: white;
+  width: 100%;
+  padding: 1rem;
+}
+
+.errorPageContent {
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+.pageNotFoundScreen h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.pageNotFoundScreen p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-bottom: 1rem;
+}
+
+.brokenUrlDisplay {
+  background: rgba(255,255,255,0.1);
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  word-break: break-all;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.brokenUrlDisplay code {
+  background: rgba(255,255,255,0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.returnHomeButton {
+  background: #ffffff;
+  color: #000000;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  display: inline-block;
+  margin-top: 1rem;
+  transition: all 0.3s;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.returnHomeButton:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .errorPageContent {
+    padding: 1rem;
+  }
+}

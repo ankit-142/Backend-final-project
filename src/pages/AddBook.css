@@ -1,0 +1,128 @@
+.addBookPage {
+  width: 100%;
+  padding: 2rem;
+  background: #f8f8f8;
+  min-height: 100vh;
+}
+
+.pageTitle {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pageTitle h1 {
+  color: #000000;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.pageTitle p {
+  color: #666666;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.newBookForm {
+  background: white;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+}
+
+.inputRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.inputField {
+  margin-bottom: 2rem;
+}
+
+.inputField label {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: #000000;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.inputField input,
+.inputField select,
+.inputField textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.inputField input:focus,
+.inputField select:focus,
+.inputField textarea:focus {
+  outline: none;
+  border-color: #000000;
+  background: white;
+}
+
+.inputField input.inputError,
+.inputField select.inputError,
+.inputField textarea.inputError {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.inputField textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.validationMessage {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: block;
+  font-weight: 500;
+}
+
+.addToLibraryButton {
+  background: #000000;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: clamp(1rem, 2.2vw, 1.1rem);
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.addToLibraryButton:hover {
+  background: #333333;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .addBookPage {
+    padding: 1rem;
+  }
+  
+  .newBookForm {
+    padding: 2rem;
+  }
+  
+  .inputRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
